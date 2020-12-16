@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="default">
+    <!-- Ground Plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- ************************************ -->
+    <!-- Model under the effect of the plugin -->
+    <!-- ************************************ -->
+    <model name="box">
+      <pose>1 1 1.2 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 1 1</size>
+            </box>
+          </geometry>
+        </visual>
+      </link>
+      <!-- Here we associate the plugin to this model -->
+      <plugin name="model_push" filename="libset_velocity.so"/>
+    </model>
+    <!-- ************************************ -->
+  </world>
+</sdf>

@@ -1,0 +1,5 @@
+.*.swp
+03_actor_with_plugin/build
+03_actor_with_plugin/src/CMakeLists.txt
+03_actor_with_plugin/devel
+03_actor_with_plugin/.catkin_workspace

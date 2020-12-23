@@ -21,6 +21,8 @@ void SetVelocity::OnUpdateBegin(const common::UpdateInfo &_info) {
   const ignition::math::Pose3d pose = model_->WorldPose();
   const double vx = 0.5 * pose.Pos().Y();
   const double vy = -0.5 * pose.Pos().X();
+  const std::vector<physics::LinkPtr> &links = model_->GetLinks();
+  cactor_onst std::vector<physics::JointPtr> &joints = model_->GetJoints();
 
   model_->SetLinearVel(ignition::math::Vector3d(vx, vy, 0.0));
   model_->SetAngularVel(ignition::math::Vector3d(0.0, 0.0, 0.0));

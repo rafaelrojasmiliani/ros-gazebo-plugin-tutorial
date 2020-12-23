@@ -31,16 +31,11 @@
 #include <string>
 #include <thread>
 
-#define PI 3.14159265359
 using namespace gazebo;
 GZ_REGISTER_MODEL_PLUGIN(ActorPlugin)
 
-#define WALKING_ANIMATION "walking"
-
-/////////////////////////////////////////////////
 ActorPlugin::ActorPlugin() {}
 
-/////////////////////////////////////////////////
 void ActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   actor_ = boost::dynamic_pointer_cast<physics::Actor>(_model);
   world_ = actor_->GetWorld();
@@ -49,7 +44,6 @@ void ActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
       std::bind(&ActorPlugin::OnUpdate, this, std::placeholders::_1)));
 }
 
-/////////////////////////////////////////////////
 void ActorPlugin::OnUpdate(const common::UpdateInfo &_info) {
   const double dt = (_info.simTime - this->last_update_).Double();
   const ignition::math::Pose3d pose = actor_->WorldPose();

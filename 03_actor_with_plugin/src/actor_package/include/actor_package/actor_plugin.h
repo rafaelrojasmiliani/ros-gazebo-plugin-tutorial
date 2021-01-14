@@ -40,6 +40,7 @@ private:
   ignition::math::Vector3d start_location_;
   std::vector<event::ConnectionPtr> connections_;
   common::Time last_update_;
+  physics::TrajectoryInfoPtr trajectory_info_;
 };
 } // namespace gazebo
 #endif

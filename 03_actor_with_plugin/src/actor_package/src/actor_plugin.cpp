@@ -42,6 +42,15 @@ void ActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) {
   start_location_ = actor_->WorldPose().Pos();
   connections_.push_back(event::Events::ConnectWorldUpdateBegin(
       std::bind(&ActorPlugin::OnUpdate, this, std::placeholders::_1)));
+
+  auto skelAnims = this->actor->SkeletonAnimations();
+  if (skelAnims.find(WALKING_ANIMATION) != skelAnims.end()) {
+    // Create custom trajectory
+    trajectory_info_.reset(new physics::TrajectoryInfo());
+    trajectory_info_->type = WALKING_ANIMATION;
+    trajectory_info_->duration = 1.0;
+    actor_->SetCustomTrajectory(trajectory_info_);
+  }
 }
 
 void ActorPlugin::OnUpdate(const common::UpdateInfo &_info) {

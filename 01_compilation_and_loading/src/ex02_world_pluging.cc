@@ -5,7 +5,7 @@
 #include <ignition/math/Vector3.hh>
 
 namespace gazebo {
-class SetVelocity : public ModelPlugin {
+class UpdateMessage : public ModelPlugin {
 public:
   void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/) {
     // Store the pointer to the model
@@ -14,13 +14,14 @@ public:
     // Listen to the update event. This event is broadcast every
     // simulation iteration.
     this->updateConnection = event::Events::ConnectWorldUpdateBegin(
-        std::bind(&SetVelocity::OnUpdate, this));
+        std::bind(&UpdateMessage::on_update_begin, this));
   }
 
   // Called by the world update start event
-  void OnUpdate() {
+  void on_update_begin() {
     // Apply a small linear velocity to the model.
-    this->model->SetLinearVel(ignition::math::Vector3d(.3, 0, 0));
+    const double current_time = _info.simTime.Double();
+    printf("The plugin was updated at %17.7E", current_time);
   }
 
 private:
